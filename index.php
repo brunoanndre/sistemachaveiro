@@ -18,7 +18,7 @@ if($_SESSION['login'] == true){
 if($pagina != 'login' && $pagina != 'esqueceuSenha'){
     include 'header.php';
 }
-
+//redireciona o usuario para as paginas
 if(isset($_SESSION['nivel_acesso'])){
     if($_SESSION['nivel_acesso'] == 1){
         switch($pagina){
