@@ -66,7 +66,7 @@ class UsuarioDaoPgsql implements UsuarioDAO{
     }
 
     public function buscarConsulta(){
-        $sql = $this->pdo->prepare("SELECT * FROM usuarios WHERE ativo = true;");
+        $sql = $this->pdo->prepare("SELECT * FROM usuarios WHERE ativo = true ORDER BY id_usuario;");
         $sql->execute();
 
         if($sql->rowCount() > 0 ){

@@ -58,4 +58,6 @@ class Endereco{
 interface EnderecoDAO{
     public function adicionar(Endereco $e);
     public function buscarEndereco($logradouro, $numero);
+    public function buscarPeloId($id);
+    public function editar(Endereco $e);
 }

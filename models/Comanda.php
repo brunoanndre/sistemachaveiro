@@ -2,6 +2,11 @@
 
 class Comanda{
     private $id;
+    private $idEndereco;
+    private $idUsuario1;
+    private $idUsuario2;
+    private $idCliente;
+    private $idPagamento;
     private $dataInicial;
     private $dataFinal;
     private $descricao;
@@ -18,6 +23,41 @@ class Comanda{
     }
     public function setId($id){
         $this->id = trim($id);
+    }
+
+    public function getIdPagamento(){
+        return $this->idPagamento;
+    }
+    public function setIdPagamento($idPagamento){
+        $this->idPagamento = trim($idPagamento);
+    }
+
+    public function getIdCliente(){
+        return $this->idCliente;
+    }
+    public function setIdCliente($idCliente){
+        $this->idCliente = trim($idCliente);
+    }
+
+    public function getIdUsuario2(){
+        return $this->idUsuario2;
+    }
+    public function setIdUsuario2($idUsuario2){
+        $this->idUsuario2 = trim($idUsuario2);
+    }
+
+    public function getIdUsuario1(){
+        return $this->idUsuario1;
+    }
+    public function setIdUsuario1($idUsuario1){
+        $this->idUsuario1 = trim($idUsuario1);
+    }
+
+    public function getIdEndereco(){
+        return $this->idEndereco;
+    }
+    public function setIdEndereco($idEndereco){
+        $this->idEndereco = trim($idEndereco);
     }
 
     public function getDataInicial(){
@@ -96,4 +136,5 @@ interface ComandaDAO{
     public function editar(Comanda $c);
     public function cancelar(Comanda $c);
     public function encerrar(Comanda $c);
+    public function buscarConsulta($parametro);
 }

@@ -28,12 +28,19 @@ if(isset($_SESSION['nivel_acesso'])){
            case 'exibirUsuario': include 'view/exibirUsuario.php'; break;
            case 'editarUsuario': include 'view/editarUsuario.php'; break;
            case 'cadastrarComanda': include 'view/cadastrarComanda.php'; break;
+           case 'consultarClientes': include 'view/consultarClientes.php'; break;
+           case 'cadastrarCliente': include 'view/cadastrarCliente.php'; break;
+           case 'exibirCliente': include 'view/exibirCliente.php'; break;
+           case 'editarCliente': include 'view/editarCliente.php'; break;
         }
     }else{
         switch($pagina){
             default: case 'consultarServicos': include 'view/consultarServicos.php'; break;
             case 'exibirUsuario': include 'view/exibirUsuario.php'; break;
             case 'cadastrarComanda': include 'view/cadastrarComanda.php'; break;
+            case 'consultarClientes': include 'view/consultarClientes.php'; break;
+            case 'cadastrarCliente': include 'view/cadastrarCliente.php'; break;
+            case 'exibirCliente': include 'view/exibirCliente.php'; break;
         }
     }
 }

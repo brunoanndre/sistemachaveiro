@@ -1,4 +1,13 @@
 <?php
+    require_once 'dao/ComandaDaoPgsql.php';
+    require_once 'dao/ClienteDaoPgsql.php';
+    require_once 'dao/EnderecoDaoPgsql.php';
+
+    $enderecodao = New EnderecoDaoPgsql($pdo);
+    $clientedao = New ClienteDaoPgSql($pdo);
+    $comandadao = New ComandaDaoPgSql($pdo);
+    $parametro = "todas";
+    $listaComandas  = $comandadao->buscarConsulta($parametro);
 
 
 ?>
@@ -6,7 +15,7 @@
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>
 <div class="container">
     <h2 class="consulta_comandas">Consulta de Comandas</h2>
-    <div class="jumdbotron">
+    <div class="jumbotron">
             <a href="?pagina=cadastrarComanda"><button class="btn  btn-success">Cadastrar Nova Comanda</button><br><br></a>
             <form action="?pagina=consultarServicos" method="post">
             <span>Mostrar comandas agendadas: </span>
@@ -18,29 +27,32 @@
                 <tr>
                     <th></th>
                     <th>ID</th>
-                    <th>Data</th>
-                    <th>Previsão de Chegada</th>
-                    <th>Endereço</th>
+                    <th>Cliente</th>
                     <th>Descrição</th>
+                    <th>Endereço</th>
+                    <th>Data de abertura</th>
+
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td><span class="glyphicon glyphicon-eye-open"></span></td>
-                    <td>1</td>
-                    <td>22/03/2021</td>
-                    <td>...</td>
-                    <td>Rua teste</td>
-                    <td>Trocar fechadura</td>
-                </tr>
-                <tr>
-                    <td><span class="glyphicon glyphicon-eye-open"></span></td>
-                    <td>2</td>
-                    <td>22/03/2021</td>
-                    <td>...</td>
-                    <td>Avenida batata</td>
-                    <td>Blablabla</td>
-                </tr>
+            <?php 
+                if($listaComandas == false){
+                    echo '<tr><td colspan="6" class="text-center">Nenhum chamado encontrado.</td></tr>';
+                }else{
+                    foreach($listaComandas as $comanda){
+                        $cliente = $clientedao->buscarPeloId($comanda->getIdCliente());
+                        $endereco = $enderecodao->buscarPeloId($comanda->getIdEndereco());
+                        echo '<tr>';
+                        echo '<td><a href="index.php?pagina=exibirComanda&id=' . $comanda->getId()  . '"><span class="glyphicon glyphicon-eye-open"></span></td></a>';
+                        echo '<td>' . $comanda->getId() . '</td>';
+                        echo '<td>' . $cliente->getNome() . '</td>';
+                        echo '<td>' . $comanda->getDescricao() . '</td>';
+                        echo '<td>'. $endereco->getCidade() .', '. $endereco->getLogradouro() . ', '. $endereco->getNumero(). '</td>';
+                        echo '<td>' . $comanda->getDataInicial() . '</td></tr>';
+                    }
+                }
+            ?>
+ 
             </tbody>
         </table>
     </div>
